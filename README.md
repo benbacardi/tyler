@@ -11,7 +11,47 @@ Python webservice for tiling static maps.
 
 [pypi]: https://pypi.python.org/pypi/tyler/
 
+Installation
+------------
+
+Tyler is designed to be deployed in your own Django environment.
+
+* Add `tyler` to your `INSTALLED_APPS` setting.
+* Add `tyler.urls` to your `urls.py`:
+
+```python
+urlpatterns = patterns('',
+    url(r'^', include('tyler.urls')),
+)
+```
+
+* Optionally, set `TYLER_CACHE_DURATION`. It defaults to one week.
+
+Usage
+-----
+
+To use the service, call the URL with optional parameters to reutrn:
+
+```
+GET /?lat=51.5008198&lon=-0.1427437&width=800&height=600
+```
+
+The available parameters are:
+
+* **lat**: The latitude to center the map on.
+* **lon**: The longitude to center the map on.
+* **zoom**: The zoom level (`0` to `19`). Defaults to `17`.
+* **width**: The pixel width of the resulting image. Defaults to `800`.
+* **height**: The pixel height of the resulting image. Defaults to `600`.
+* **greyscale**: Whether to render the image in greyscale. Defaults to `False`.
+* **tile_url**: The URL of the tiling service. Default's to OpenStreetMap's: `http://[abc].tile.openstreetmap.org/{zoom}/{x}/{y}.png`. Requires the following parameters in the URL:
+  * **{zoom}**: Where the zoom level is defined.
+  * **{x}**: The x-tile coordinate.
+  * **{y}**: The y-tile coordinate.
+  * **[???]**: Available content sharding domains. For example, OpenStreetMap uses `[abc]`. MapQuest uses `[1234]`.
+
 TODO
 ----
 
 * Handle low zoom levels
+* Change output formats
