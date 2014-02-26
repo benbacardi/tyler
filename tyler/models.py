@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-
 from __future__ import division
+
 import re
 import io
 import math
@@ -8,6 +7,7 @@ import requests
 import random
 
 from PIL import Image, ImageFilter
+
 
 def numTiles(z):
   return(math.pow(2,z))
@@ -43,8 +43,6 @@ class Map(object):
         self.width = width
         self.height = height
         self.greyscale = greyscale
-
-        print tile_url
 
         self.shards = self.shard_re.findall(tile_url)[0]
         self.tile_url = self.shard_re.sub('{sharding}', tile_url)
