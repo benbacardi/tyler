@@ -1,0 +1,10 @@
+*.pyc
+.GITVERSION
+*.swp
+deb_dist*
+dist*
+*.egg-info*
+docs/_build
+._*
+.sass-cache
+test_project/test_project/static
