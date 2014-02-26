@@ -6,28 +6,28 @@ import math
 import requests
 import random
 
-from PIL import Image, ImageFilter
+from PIL import Image
 
 
 def numTiles(z):
-  return(math.pow(2,z))
+    return math.pow(2,z)
 
 def sec(x):
-  return(1/math.cos(x))
+    return 1 / math.cos(x)
 
 def latlon2relativeXY(lat,lon):
-  x = (lon + 180) / 360
-  y = (1 - math.log(math.tan(math.radians(lat)) + sec(math.radians(lat))) / math.pi) / 2
-  return(x,y)
+    x = (lon + 180) / 360
+    y = (1 - math.log(math.tan(math.radians(lat)) + sec(math.radians(lat))) / math.pi) / 2
+    return x, y
 
 def latlon2xy(lat,lon,z):
-  n = numTiles(z)
-  x,y = latlon2relativeXY(lat,lon)
-  return(n*x, n*y)
+    n = numTiles(z)
+    x,y = latlon2relativeXY(lat, lon)
+    return n*x, n*y
   
 def tileXY(lat, lon, z):
-  x,y = latlon2xy(lat,lon,z)
-  return(int(x),int(y))
+    x,y = latlon2xy(lat, lon, z)
+    return int(x), int(y)
 
 class Map(object):
 
@@ -115,4 +115,4 @@ class Map(object):
         return io.BytesIO(requests.get(self.get_tile_url(zoom, x, y)).content)
 
     def get_tile_url(self, zoom, x, y):
-        return self.tile_url.format(zoom=self.zoom, x=x, y=y, sharding=random.choice(self.shards))
+        return self.tile_url.format(zoom=zoom, x=x, y=y, sharding=random.choice(self.shards))
