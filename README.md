@@ -3,6 +3,8 @@ Tyler
 
 Python webservice for tiling static maps.
 
+[![Build Status Badge](https://travis-ci.org/benbacardi/tyler.png?branch=master)](https://travis-ci.org/benbacardi/tyler)  
+[![Coverage Status Badge](https://coveralls.io/repos/benbacardi/tyler/badge.png?branch=master)](https://coveralls.io/r/benbacardi/tyler?branch=master)  
 [![Code Health Badge](https://landscape.io/github/benbacardi/tyler/master/landscape.png)](https://landscape.io/github/benbacardi/tyler)  
 [![Version Badge](https://pypip.in/v/tyler/badge.png)][pypi]  
 [![Downloads Badge](https://pypip.in/d/tyler/badge.png)][pypi]  
@@ -30,7 +32,7 @@ urlpatterns = patterns('',
 Usage
 -----
 
-To use the service, call the URL with optional parameters to return:
+To use the service, call the URL with optional parameters to return the image in a `.png` format:
 
 ```
 GET /?lat=51.5008198&lon=-0.1427437&width=800&height=600
