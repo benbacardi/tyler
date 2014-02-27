@@ -1,0 +1,15 @@
+language: python
+virtualenv:
+  system_site_packages: true
+python:
+  - "2.6"
+  - "2.7"
+install:
+  - sudo apt-get -qq install python-imaging
+  - pip install -q gitversion
+  - pip install -q .
+  - pip install -q coveralls
+script:
+  - coverage run --source=tyler test_project/manage.py test tyler
+after_success:
+  - coveralls
