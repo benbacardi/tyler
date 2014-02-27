@@ -32,7 +32,7 @@ urlpatterns = patterns('',
 Usage
 -----
 
-To use the service, call the URL with optional parameters to return:
+To use the service, call the URL with optional parameters to return the image in a `.png` format:
 
 ```
 GET /?lat=51.5008198&lon=-0.1427437&width=800&height=600
