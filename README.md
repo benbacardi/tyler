@@ -53,7 +53,7 @@ The available parameters are:
 * **width**: The pixel width of the resulting image. Defaults to `800`.
 * **height**: The pixel height of the resulting image. Defaults to `600`.
 * **greyscale**: Whether to render the image in greyscale. Defaults to `False`.
-* **tile_url**: The URL of the tiling service. Default's to OpenStreetMap's: `http://[abc].tile.openstreetmap.org/{zoom}/{x}/{y}.png`. Requires the following parameters in the URL:
+* **tile_url**: The URL of the tiling service. Defaults to OpenStreetMap's: `http://[abc].tile.openstreetmap.org/{zoom}/{x}/{y}.png`. Requires the following parameters in the URL:
   * **{zoom}**: Where the zoom level is defined.
   * **{x}**: The x-tile coordinate.
   * **{y}**: The y-tile coordinate.
