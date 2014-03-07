@@ -58,9 +58,3 @@ The available parameters are:
   * **{x}**: The x-tile coordinate.
   * **{y}**: The y-tile coordinate.
   * **[???]**: Available content sharding domains. For example, OpenStreetMap uses `[abc]`. MapQuest uses `[1234]`.
-
-TODO
-----
-
-* Handle low zoom levels
-* Change output formats
