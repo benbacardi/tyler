@@ -13,6 +13,11 @@ Python webservice for tiling static maps.
 
 [pypi]: https://pypi.python.org/pypi/tyler/
 
+Demo
+----
+
+A demo can be found at https://tyler-demo.herokuapp.com
+
 Installation
 ------------
 
