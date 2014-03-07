@@ -16,9 +16,9 @@ Python webservice for tiling static maps.
 Demo
 ----
 
-A demo can be found at https://tyler-demo.herokuapp.com
+A demo can be found at https://tyler-demo.herokuapp.com - the Heroku project code is at https://github.com/benbacardi/tyler-heroku
 
-![Usage example](https://tyler-demo.herokuapp.com/?greyscale=False&lat=51.5132&lon=-0.1032&zoom=11&width=800&height=400&tile_url=http://[abcd].tile.stamen.com/watercolor/{zoom}/{x}/{y}.jpg "Usage example")
+[![Usage example](https://tyler-demo.herokuapp.com/?greyscale=False&lat=51.5132&lon=-0.1032&zoom=11&width=800&height=400&tile_url=http://[abcd].tile.stamen.com/watercolor/{zoom}/{x}/{y}.jpg "Usage example")](https://tyler-demo.herokuapp.com/?greyscale=False&lat=51.5132&lon=-0.1032&zoom=11&width=800&height=400&tile_url=http://[abcd].tile.stamen.com/watercolor/{zoom}/{x}/{y}.jpg)
 
 Installation
 ------------
