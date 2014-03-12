@@ -6,6 +6,9 @@ import math
 import requests
 import random
 
+from django.core.cache import cache
+from django.conf import settings
+
 from PIL import Image
 
 
@@ -112,7 +115,12 @@ class Map(object):
         return image.save(filename, format='png')
 
     def get_tile(self, zoom, x, y):
-        return io.BytesIO(requests.get(self.get_tile_url(zoom, x, y)).content)
+        cache_key = 'tile:%s:%s:%s:%s' % (self.tile_url, zoom, x, y)
+        image_data = cache.get(cache_key)
+        if not image_data:
+            image_data = requests.get(self.get_tile_url(zoom, x, y)).content
+            cache.set(cache_key, image_data, getattr(settings, 'TYLER_TILE_CACHE_DURATION', 60 * 60 * 24 * 7))
+        return io.BytesIO(image_data)
 
     def get_tile_url(self, zoom, x, y):
         return self.tile_url.format(zoom=zoom, x=x, y=y, sharding=random.choice(self.shards))

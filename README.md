@@ -33,7 +33,7 @@ urlpatterns = patterns('',
 )
 ```
 
-* Optionally, set `TYLER_CACHE_DURATION`. It defaults to one week.
+* Optionally, set `TYLER_CACHE_DURATION` to cache . It defaults to one week.
 
 Usage
 -----
@@ -57,3 +57,10 @@ The available parameters are:
   * **{x}**: The x-tile coordinate.
   * **{y}**: The y-tile coordinate.
   * **[???]**: Available content sharding domains. For example, OpenStreetMap uses `[abc]`. MapQuest uses `[1234]`.
+
+Caching
+-------
+
+To control the caching of the resultant image, set `TYLER_CACHE_DURATION` in `settings.py` to the number of seconds to cache for. This defaults to one week.
+
+TO control the caching of the individual tiles used to create the image, set `TYLER_TILE_CACHE_DURATION` in `settings.py` to the number of settings to cache for. This also defaults to one week.
