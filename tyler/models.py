@@ -93,10 +93,14 @@ class Map(object):
         image_height = tiles_y * self.tile_height
 
         image = Image.new('RGBA', (image_width, image_height), (0,0,0,0))
+        blank_image = Image.new('RGBA', (image_width, image_height), (0,0,0,0))
 
         for row_offset, row in enumerate(tiles):
             for col_offset, (x, y) in enumerate(row):
-                new_image = Image.open(self.get_tile(self.zoom, x, y))
+                try:
+                    new_image = Image.open(self.get_tile(self.zoom, x, y))
+                except requests.HTTPError:
+                    new_image = blank_image
                 image.paste(new_image, ((col_offset * self.tile_width, row_offset * self.tile_height)))
 
         image = image.crop((
@@ -118,7 +122,9 @@ class Map(object):
         cache_key = 'tile:%s:%s:%s:%s' % (self.tile_url, zoom, x, y)
         image_data = cache.get(cache_key)
         if not image_data:
-            image_data = requests.get(self.get_tile_url(zoom, x, y)).content
+            response = requests.get(self.get_tile_url(zoom, x, y))
+            response.raise_for_status()
+            image_data = response.content
             cache.set(cache_key, image_data, getattr(settings, 'TYLER_TILE_CACHE_DURATION', 60 * 60 * 24 * 7))
         return io.BytesIO(image_data)
 
