@@ -33,4 +33,4 @@ def get_image(request):
 
         cache.set(cache_key, image_data, getattr(settings, 'TYLER_CACHE_DURATION', 60 * 60 * 24 * 7))
 
-    return HttpResponse(image_data, mimetype='image/png')
+    return HttpResponse(image_data, mimetype="image/%s" % map_form.cleaned_data['format'])

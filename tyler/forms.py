@@ -8,6 +8,7 @@ class MapForm(forms.Form):
     height = forms.IntegerField(min_value=1, max_value=3000, required=False)
     greyscale = forms.BooleanField(required=False)
     tile_url = forms.CharField(required=False)
+    format = forms.CharField(required=False)
 
     def check(self, field, default):
         current = self.cleaned_data[field]
@@ -32,6 +33,9 @@ class MapForm(forms.Form):
 
     def clean_greyscale(self):
         return self.check('greyscale', False)
+
+    def clean_format(self):
+        return self.check('format', 'png')
 
     def clean_tile_url(self):
         return self.check('tile_url', 'http://[abc].tile.openstreetmap.org/{zoom}/{x}/{y}.png')
