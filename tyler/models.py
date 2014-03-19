@@ -7,6 +7,7 @@ import requests
 import random
 
 from django.core.cache import cache
+from django.core.exceptions import ValidationError
 from django.conf import settings
 
 from PIL import Image
@@ -117,7 +118,10 @@ class Map(object):
         if not filename:
             return image
 
-        return image.save(filename, format=self.format)
+        try:
+            return image.save(filename, format=self.format)
+        except (KeyError, IOError, ValueError):
+            raise ValidationError("Unsupported format: %s" % self.format)
 
     def get_tile(self, zoom, x, y):
         cache_key = 'tile:%s:%s:%s:%s' % (self.tile_url, zoom, x, y)
