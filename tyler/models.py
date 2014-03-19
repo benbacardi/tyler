@@ -7,6 +7,7 @@ import requests
 import random
 
 from django.core.cache import cache
+from django.core.exceptions import ValidationError
 from django.conf import settings
 
 from PIL import Image
@@ -39,13 +40,14 @@ class Map(object):
 
     shard_re = re.compile(r'\[(.*)\]')
 
-    def __init__(self, lat, lon, zoom=17, width=800, height=600, tile_url='http://[abc].tile.openstreetmap.org/{zoom}/{x}/{y}.png', greyscale=False):
+    def __init__(self, lat, lon, zoom=17, width=800, height=600, tile_url='http://[abc].tile.openstreetmap.org/{zoom}/{x}/{y}.png', greyscale=False, format='png'):
         self.lat = lat
         self.lon = lon
         self.zoom = zoom
         self.width = width
         self.height = height
         self.greyscale = greyscale
+        self.format = format
 
         self.shards = self.shard_re.findall(tile_url)[0]
         self.tile_url = self.shard_re.sub('{sharding}', tile_url)
@@ -116,7 +118,10 @@ class Map(object):
         if not filename:
             return image
 
-        return image.save(filename, format='png')
+        try:
+            return image.save(filename, format=self.format)
+        except (KeyError, IOError, ValueError):
+            raise ValidationError("Unsupported format: %s" % self.format)
 
     def get_tile(self, zoom, x, y):
         cache_key = 'tile:%s:%s:%s:%s' % (self.tile_url, zoom, x, y)
