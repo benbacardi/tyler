@@ -9,7 +9,7 @@ setup(
     author               = 'Ben Cardy',
     author_email         = 'benbacardi@gmail.com',
     packages             = find_packages(),
-    install_requires     = ['django', 'requests', 'Pillow',],
+    install_requires     = ['django', 'django-cacheback', 'requests', 'Pillow',],
     include_package_data = True,
     classifiers          = [
         'Development Status :: 3 - Alpha',

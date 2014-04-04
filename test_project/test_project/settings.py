@@ -72,8 +72,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cacheback',
     'tyler',
 )
+
+CELERY_ALWAYS_EAGER = True
+import djcelery
+djcelery.setup_loader()
 
 try:
     from local_settings import *

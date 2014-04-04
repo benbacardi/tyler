@@ -6,7 +6,8 @@ import math
 import requests
 import random
 
-from django.core.cache import cache
+from cacheback.decorators import cacheback
+
 from django.core.exceptions import ValidationError
 from django.conf import settings
 
@@ -28,10 +29,17 @@ def latlon2xy(lat,lon,z):
     n = numTiles(z)
     x,y = latlon2relativeXY(lat, lon)
     return n*x, n*y
-  
+
 def tileXY(lat, lon, z):
     x,y = latlon2xy(lat, lon, z)
     return int(x), int(y)
+
+@cacheback(getattr(settings, 'TYLER_TILE_CACHE_DURATION', 60 * 60 * 24 * 7))
+def cached_get_tile(tile_url):
+    response = requests.get(tile_url)
+    response.raise_for_status()
+    image_data = response.content
+    return image_data
 
 class Map(object):
 
@@ -124,13 +132,7 @@ class Map(object):
             raise ValidationError("Unsupported format: %s" % self.format)
 
     def get_tile(self, zoom, x, y):
-        cache_key = 'tile:%s:%s:%s:%s' % (self.tile_url, zoom, x, y)
-        image_data = cache.get(cache_key)
-        if not image_data:
-            response = requests.get(self.get_tile_url(zoom, x, y))
-            response.raise_for_status()
-            image_data = response.content
-            cache.set(cache_key, image_data, getattr(settings, 'TYLER_TILE_CACHE_DURATION', 60 * 60 * 24 * 7))
+        image_data = cached_get_tile(self.get_tile_url(zoom, x, y))
         return io.BytesIO(image_data)
 
     def get_tile_url(self, zoom, x, y):

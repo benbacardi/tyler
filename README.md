@@ -24,7 +24,7 @@ Installation
 
 Tyler is designed to be deployed in your own Django environment.
 
-* Add `tyler` to your `INSTALLED_APPS` setting.
+* Add `cacheback` and `tyler` to your `INSTALLED_APPS` setting.
 * Add `tyler.urls` to your `urls.py`:
 
 ```python
