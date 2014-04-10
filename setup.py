@@ -11,6 +11,8 @@ setup(
     packages             = find_packages(),
     install_requires     = ['django', 'django-cacheback', 'requests', 'Pillow',],
     include_package_data = True,
+    test_suite           = 'setuptest.setuptest.SetupTestSuite',
+    tests_require        = ['django-autoconfig', 'django-setuptest'],
     classifiers          = [
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
