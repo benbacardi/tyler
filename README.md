@@ -63,4 +63,4 @@ Caching
 
 To control the caching of the resultant image, set `TYLER_CACHE_DURATION` in `settings.py` to the number of seconds to cache for. This defaults to one week.
 
-TO control the caching of the individual tiles used to create the image, set `TYLER_TILE_CACHE_DURATION` in `settings.py` to the number of settings to cache for. This also defaults to one week.
+To control the caching of the individual tiles used to create the image, set `TYLER_TILE_CACHE_DURATION` in `settings.py` to the number of settings to cache for. This also defaults to one week.
